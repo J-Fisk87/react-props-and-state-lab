@@ -27,9 +27,16 @@ class App extends React.Component {
     }
     fetch(petsURL).then(r => r.json()).then(j => this.setState({ pets: j }))
   }
+
+  onAdoptPet = (id) => {
+    // this.state.pets.find(pet => pet.id = id)
+    const petTarget = this.state.pets.find(pet => pet.id === id)
+    petTarget.isAdopted = true
+    console.log(petTarget);
+  }
   
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <div className="ui container">
         <header>
@@ -41,7 +48,7 @@ class App extends React.Component {
               <Filters handleButtonClick={this.onFindPetsClick} handleTypeChange={this.onChangeType} />
             </div>
             <div className="twelve wide column">
-              <PetBrowser pets={this.state.pets} />
+              <PetBrowser pets={this.state.pets} handleAdoption={this.onAdoptPet} />
             </div>
           </div>
         </div>
